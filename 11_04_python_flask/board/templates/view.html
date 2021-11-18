@@ -1,0 +1,6 @@
+{{result.title}}<br>
+{{result.name}}<br>
+{{result.regdate|datetime_format}}<br>
+{{result.contents}}<br>
+{{result.hit}}<br><br>
+<a href="{{url_for('lists', page = page, search=search, keyword=keyword)}}">리스트</a>
