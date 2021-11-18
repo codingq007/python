@@ -1,0 +1,38 @@
+html, body, main {
+    height: 100%;
+}
+
+li { list-style: none;}
+
+.navbar.navbar-inverse {
+    margin-bottom: 0;
+}
+
+.bbs-title{
+    position:relative;
+    top:-130px;
+    color:white;
+}
+
+div.login-form, div.join-form{
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+
+}
+
+.form-login, .form-join{
+    background-color: white;
+    padding : 20px 60px;
+    /* border:1px solid #ccc; */
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,.1);
+    padding-bottom: 40px;
+}
+
+
+footer {
+    border-top: 1px solid #ccc;
+}

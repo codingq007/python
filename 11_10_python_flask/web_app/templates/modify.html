@@ -1,0 +1,24 @@
+{% extends "sub_layout.html" %}
+
+{% block contents_left %}
+    <h1 class="bbs-title">게시판 - 글수정</h1>
+    <!-- <form action="/modify/{{doc._id}}" method="POST" name="form"> -->
+    <form action="{{url_for('board.modify', idx = doc._id)}}" method="POST" name="form" enctype="multipart/form-data">
+        <ul>
+            <li>작성자</li>
+            <li><input type="text" name="name" size="28" value="{{session['name']}}" readonly></li>
+            <li>제목</li>
+            {% if doc.attachfile %}
+            <li>
+                <input type="checkbox" id="oldfile" name="oldfile">
+                <label for="oldfile">첨부파일 삭제 : {{doc.attachfile}}</label>
+            </li>
+            {% endif %}
+            <li><input type="text" name="title" size="28" value="{{doc.title}}"></li>
+            <li>내용</li>
+            <li><textarea name="contents" id="summernote" cols="30" rows="10">{{doc.contents}}</textarea></li>
+            <input type="file" name="attachfile">
+            <li><input type="submit" value="수정하기"></li>
+        </ul>
+    </form>
+{% endblock contents_left %}

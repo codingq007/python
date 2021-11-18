@@ -1,0 +1,86 @@
+{% extends "layout.html"%}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{messages[-1]}}") // 리스트의 맨마지막 요소
+        </script>
+    {% endif %}
+{% endwith%}
+
+{% block contents %}
+<script>
+    function validate_email(email){
+        var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+        /*
+            ^ : 문자열 시작, $ : 문자열의 종료
+            [0-9a-zA-Z] : 숫자, 알파벳 대소문자
+            [-_.]?[0-9a-zA-Z] : - 혹은 _ 혹은 . 문자가 0개 이상이고 뒤에 알파벳이 나와야 함.
+
+            . : 종류를 가리지 않는 하나의 문자
+            () : 소괄호 안의 패턴은 하나의 문자로 인식
+            ()* : 소괄호안의 패턴이 여러번 반복
+
+            @ : @문자가 있어야 한다.
+            [0-9a-zA-Z] 숫자나 알파벳 대소문자가 나온다.
+
+            {} : 횟수, 범위
+            [a-zA-Z]{2,3}$ : 2글자 혹은 3글자 알파벳으로 끝나는 패턴
+            \. : 정규식에서 사용하는 . 아닌 escape 처리
+            i : 대소문자 구분 안함.
+        */
+
+        return regex.test(email);
+    }
+
+    function chk_form(){
+        // if($("input[name=email]").val() ==""){
+        //     alert("이메일을 입력하세요!!");
+        //     $("input[name=email]").focus();
+        //     return false;
+        // }
+        // return true;
+
+        if($("#email").val() ==""){
+            alert("이메일을 입력하세요!!");
+            $("#email").focus();
+            return false;
+        }
+
+        //$.trim() : jQuery의 trim() 함수 
+        if(!validate_email($.trim($("#email").val()))){
+            alert("이메일 형식이 아닙니다...다시 확인하세요!!!");
+            $("email").focus();
+            return false;
+        }
+
+
+        if($("#pw").val() ==""){
+            alert("비밀번호를 입력하세요!!");
+            $("#pw").focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<div class="login-form">
+    <!-- <form action="/login" method="post"> -->
+    <form class="form-login" action="{{url_for('member.member_login')}}" method="post" onsubmit="return chk_form()">
+        {% if next_url %}
+            <input type="hidden" name="next_url" value="{{next_url}}">
+        {% endif%}
+        <h3 class="text-center">로그인</h3>
+        <div class="form-group">
+            <input class="form-control" type="text" name="email" id="email" placeholder="이메일">
+        </div>
+        <div class="form-group">                
+            <!-- <li><input type="email" name="email" id="email" placeholder="이메일" required></li><br> -->
+            <input class="form-control" type="password" name="pw" id="pw" placeholder="비밀번호">           
+        </div>
+            <input class="btn btn-lg btn-primary btn-block" type="submit" value="로그인">
+        
+    </form>
+</div>
+{% endblock contents %}

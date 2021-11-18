@@ -1,0 +1,81 @@
+{% extends "layout.html"%}
+
+{% block contents %}
+<script>
+    function validate_email(email){
+        var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        return regex.test(email);
+    }
+    
+    function join_chk_form()
+    {
+        if($.trim($("#name").val()) == ""){
+            alert("이름을 입력하세요.");
+            $("#name").focus();
+            return false;
+        }
+        if($.trim($("#email").val()) == ""){
+            alert("이메일을 입력하세요.");
+            $("#email").focus();
+            return false;
+        }
+        if(!validate_email($.trim($("#email").val()))){
+            alert("이메일 형식이 아닙니다. 다시 확인해주세요!!");
+            $("#email").focus();
+            return false;
+        }
+        if($.trim($("#pw1").val()) == ""){
+            alert("비밀번호를 입력하세요.");
+            $("#pw").focus();
+            return false;
+        }
+        if($.trim($("#pw2").val()) == ""){
+            alert("비밀번호를 입력하세요.");
+            $("#pw2").focus();
+            return false;
+        }
+
+        if($.trim($("#pw1").val()) != $.trim($("#pw2").val())){
+            alert("비밀번호가 서로 일치하지 않습니다.. 다시 확인하세요.")
+            $("#pw2").focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{messages[-1]}}") // 리스트의 맨마지막 요소
+        </script>
+    {% endif %}
+{% endwith%}
+
+
+
+<div class="join-form">
+    <form class="form-join" action="{{url_for('member.member_join')}}" method="post" name="form" onsubmit="return join_chk_form()">
+        <h3 class="text-center">회원 가입</h3>
+        <div class="form-group">
+            <label for="name">이름</label>
+            <input class="form-control" type="text" name="name" id="name">
+        </div>
+        <div class="form-group">
+            <label>이메일</label>
+            <input class="form-control" type="text" name="email" id="email">
+        </div>
+        <div class="form-group">
+            <label>비밀번호</label>
+            <input class="form-control" type="password" name="pw1" id="pw1">
+        </div>
+        <div class="form-group">
+            <label>비밀번호 확인</label>
+            <input class="form-control" type="password" name="pw2" id="pw2">
+        </div>
+
+        <div class="text-center"><input class="btn btn-primary btn-lg btn-block" type="submit" value="가입하기"></div>
+        </ul>
+    </form>
+</div>
+
+{% endblock contents %}

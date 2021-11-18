@@ -1,0 +1,37 @@
+{% extends "sub_layout.html" %}
+
+{% block contents_left %}
+    <script>
+        function chk_write() {
+            if($.trim($("#title").val()) == ""){
+                alert("제목을 입력하세요!!");
+                $("#title").focus();
+                return false;
+            }
+
+            // if($.trim($("#contents").val()) == ""){
+            if($.trim($("#summernote").val()) == ""){
+                alert("내용을 입력하세요!!");
+                // $("#contents").focus();
+                $("#summernote").focus();
+                return false;
+            }
+            return true;
+        }
+    </script>    
+
+    <h1 class="bbs-title">게시판 - 글쓰기</h1>
+    <form action="{{url_for('board.board_write')}}" method="POST" name="form" onsubmit="return chk_write()" enctype="multipart/form-data">
+        <ul>
+            <li>작성자</li>
+            <li><input type="text" name="name" size="28" value="{{session['name']}}" readonly></li>
+            <li>제목</li>
+            <li><input type="text" name="title" id="title" size="28"></li>
+            <li>내용</li>
+            <!-- <li><textarea name="contents" id="contents" cols="30" rows="10"></textarea></li> -->
+            <li><textarea name="contents" id="summernote" cols="30" rows="10"></textarea></li>
+            <input type="file" name="attachfile">
+            <li><input type="submit" value="등록"></li>
+        </ul>
+    </form>
+{% endblock contents_left %}
