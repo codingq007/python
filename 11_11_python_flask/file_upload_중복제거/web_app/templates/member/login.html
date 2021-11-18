@@ -1,0 +1,22 @@
+{% extends "layout.html"%}
+
+{% block contents %}
+<div class="login-form">
+    <!-- <form action="/login" method="post"> -->
+    <form class="form-login" action="{{url_for('member.member_login')}}" method="post" onsubmit="return chk_form()">
+        {% if next_url %}
+            <input type="hidden" name="next_url" value="{{next_url}}">
+        {% endif%}
+        <h3 class="text-center">로그인</h3>
+        <div class="form-group">
+            <input class="form-control" type="text" name="email" id="email" placeholder="이메일">
+        </div>
+        <div class="form-group">                
+            <!-- <li><input type="email" name="email" id="email" placeholder="이메일" required></li><br> -->
+            <input class="form-control" type="password" name="pw" id="pw" placeholder="비밀번호">           
+        </div>
+            <input class="btn btn-lg btn-primary btn-block" type="submit" value="로그인">
+        
+    </form>
+</div>
+{% endblock contents %}

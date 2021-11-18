@@ -1,0 +1,34 @@
+{% extends "sub_layout.html" %}
+
+{% block contents_left %}
+    <h1 class="bbs-title">게시판 - 글보기</h1>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td colspan="2">제목 : {{result.title}}</td>
+            </tr>
+            <tr>
+                <td>글쓴이 : {{result.name}}</td>
+                <td class="text-right">작성일 : {{result.regdate|datetime_format}} &nbsp;&nbsp;&nbsp; 조회수 : {{result.hit}}</td>
+            </tr>
+            {% if result.attachfile %}
+            <tr>
+                <td colspan="2" class="text-right"><span class="chk-label">첨부파일 : <a href="{{url_for('board.board_files', filename=result.attachfile)}}">{{result.attachfile}}</a></span></td>                 
+            </tr>
+            {% endif %}
+            <tr>
+                <td colspan="2" style="border : 0">{% autoescape false %}{{result.contents}}{% endautoescape %}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+    <br><br>
+    <a href="{{url_for('board.lists', page = page, search=search, keyword=keyword)}}" class="btn btn-success">리스트</a>
+
+    {% if session["id"] == result.writer_id %}
+    <a href="{{url_for('board.delete', idx = result.id)}}" class="btn btn-danger pull-right">글삭제</a>
+    <a href="{{url_for('board.modify', idx = result.id)}}" class="btn btn-primary pull-right">글수정</a>
+    {% endif %}
+{% endblock contents_left %}
