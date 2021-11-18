@@ -1,0 +1,22 @@
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{messages[-1]}}") // 리스트의 맨마지막 요소
+        </script>
+    {% endif %}
+{% endwith%}
+
+<link rel="stylesheet" href="../static/common.css">
+<div class="login-form">
+    <form action="/login" method="post">
+        {% if next_url %}
+            <input type="hidden" name="next_url" value="{{next_url}}">
+        {% endif%}
+        <h3>로그인</h3>
+        <ul>
+            <li><input type="text" name="email" placeholder="이메일"></li><br>
+            <li><input type="password" name="pw" placeholder="비밀번호"></li><br>           
+            <li><input type="submit" value="로그인"></li>
+        </ul>
+    </form>
+</div>
