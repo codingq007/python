@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask Template Example</title>
+    <style>
+        h3 {color: tomato};
+        h4 {color : yellowgreen};
+        .add {color : skyblue};
+    </style>
+</head>
+<body>
+    {% block heading %}
+        <h1>{% block page%}{% endblock page%} - jinja2 사용하기</h1>
+    {% endblock heading%}
+    <div class="wrap">
+        <h3>기본 템플릿 영역 시작</h3>
+        <br>
+        {% block content %}{% endblock content %}
+        <br>
+        <h3>기본 템플릿 영역 끝</h3>
+    </div>
+    <div class="add">
+        {% block add %}
+            <h2>추가된 영역</h2>
+        {% endblock add %}
+    </div>
+</body>
+</html>
