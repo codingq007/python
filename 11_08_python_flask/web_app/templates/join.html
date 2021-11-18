@@ -1,0 +1,69 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function validate_email(email){
+        var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        return regex.test(email);
+    }
+    
+    function join_chk_form()
+    {
+        if($.trim($("#name").val()) == ""){
+            alert("이름을 입력하세요.");
+            $("#name").focus();
+            return false;
+        }
+        if($.trim($("#email").val()) == ""){
+            alert("이메일을 입력하세요.");
+            $("#email").focus();
+            return false;
+        }
+        if(!validateEmail($.trim($("#email").val()))){
+            alert("이메일 형식이 아닙니다. 다시 확인해주세요!!");
+            $("#email").focus();
+            return false;
+        }
+        if($.trim($("#pw1").val()) == ""){
+            alert("비밀번호를 입력하세요.");
+            $("#pw").focus();
+            return false;
+        }
+        if($.trim($("#pw2").val()) == ""){
+            alert("비밀번호를 입력하세요.");
+            $("#pw2").focus();
+            return false;
+        }
+
+        if($.trim($("#pw1").val()) != $.trim($("#pw2").val())){
+            alert("비밀번호가 서로 일치하지 않습니다.. 다시 확인하세요.")
+            $("#pw2").focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{messages[-1]}}") // 리스트의 맨마지막 요소
+        </script>
+    {% endif %}
+{% endwith%}
+
+
+
+<link rel="stylesheet" href="../static/common.css">
+<h3>회원 가입</h3>
+<form action="{{url_for('member.member_join')}}" method="post" name="form" onsubmit="return join_chk_form()">
+    <ul>
+        <li>이름</li>
+        <li><input type="text" name="name" id="name"></li>
+        <li>이메일</li>
+        <li><input type="text" name="email" id="email"></li>
+        <li>비밀번호</li>
+        <li><input type="password" name="pw1" id="pw1"></li>
+        <li>비밀번호 확인</li>
+        <li><input type="password" name="pw2" id="pw2"></li><br>
+
+        <li><input type="submit" value="가입하기"></li>
+    </ul>
+</form>
