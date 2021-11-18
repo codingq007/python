@@ -1,0 +1,12 @@
+java
+100
+ja
+출판사
+python
+200
+adf
+adsfa
+c언어
+300
+ㅇㄹ
+ㅁㄹㅇ
