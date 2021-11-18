@@ -1,0 +1,7 @@
+from random import randint
+# print(randint(1,45))
+# 로또 번호 파일에 쓰기
+with open('./lotto2.txt','w') as f:
+    for cnt in range(6):
+        f.write(str(randint(1,45)))
+        f.write(' ')
