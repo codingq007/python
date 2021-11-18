@@ -1,0 +1,37 @@
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    // var xhr = new XMLHttpRequest();
+
+    // xhr.open("get", "{{url_for('board.test')}}");
+
+    // xhr.onreadystatechange = function(){
+    //     if(xhr.status == 200 && xhr.readyState == 4){
+    //         console.log(xhr.responseText);
+    //         var elem = document.getElementById("ajaxTest");
+    //         elem.innerHTML = xhr.responseText;
+    //     }
+    // }
+
+    // xhr.send();
+
+    // readyState 속성
+    // 0. 요청이 초기화되지 않은 상태
+    // 1. 서버와 연결이 완료된 상태
+    // 2. 요청을 서버가 받았을 때 상태
+    // 3. 요청을 처리하는 중일 때
+    // 4. 요청이 완료되고, 응답 기다릴 때
+
+    /*
+        제이쿼리 ajax 메소드
+        $.ajax() : AJAX를 이용해서 HTTP요청을 전송
+        $.get() : 전달된 주소로 GET방식의 HTTP 요청을 전송
+        $.post() : 전달된 주소로 POST 방식의 HTTP 요청을 전송
+    */    
+    $.get("{{url_for('board.test')}}").done(function(data){
+        $("#ajaxTest").html(data);
+    }).fail(function(data){
+        alert(data);
+    })
+</script>
+
+<div id="ajaxTest"></div>

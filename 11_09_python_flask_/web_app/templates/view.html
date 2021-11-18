@@ -1,0 +1,22 @@
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{messages[-1]}}") // 리스트의 맨마지막 요소
+        </script>
+    {% endif %}
+{% endwith%}
+
+{{result.title}}<br>
+{{result.name}}<br>
+{% if result.attachfile %}
+첨부파일 : <a href="{{url_for('board.board_files', filename=result.attachfile)}}">{{result.attachfile}}</a>
+{% endif %}
+{{result.regdate|datetime_format}}<br>
+{% autoescape false %}{{result.contents}}{% endautoescape %}<br>
+{{result.hit}}<br><br>
+<a href="{{url_for('board.lists', page = page, search=search, keyword=keyword)}}">리스트</a>
+
+{% if session["id"] == result.writer_id %}
+    <a href="{{url_for('board.modify', idx = result.id)}}">글수정</a>
+    <a href="{{url_for('board.delete', idx = result.id)}}">글삭제</a>
+{% endif %}
