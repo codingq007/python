@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+</head>
+<body>
+    <header>
+        {% include "nav.html" %}
+    </header>
+    <main>
+        <div class="sub-visual"></div>
+        <p></p>
+        <!-- 메인컨텐츠 -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 blog-main">
+                    {% block contents_left %}
+                    {% endblock contents_left %}
+                </div>
+                {% include "aside.html" %}
+            </div>
+        </div>
+        <!-- footer -->
+        {% include "footer.html" %}
+    </main>      
+</body>
+</html>
